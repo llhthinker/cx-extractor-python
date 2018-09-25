@@ -9,8 +9,8 @@ Used to extract text from the web page, this tool is appropriate for the web pag
 First you need to initialize a 'cx' object:
 
 ```
-from crawler.cx_extractor_Python import  cx_extractor_Python
-cx = cx_extractor_Python()
+from CxExtractor import CxExtractor
+cx = CxExtractor(threshold=186)
 ```
 
 For extracting text from a web page, You can read a HTML file from your disk:
@@ -34,6 +34,7 @@ print(text)
 
 Finally, you can get the text in this HTML.
 Notice:The constructor has two parameters that you may need to adjust.
+
 > threshold: The length of lines in the web page should exceed the threshold so   that the lines could be recognized as useful. 
 
 > blocksWidth: If the text rows in the web page are sparse, you should set blocksWidth larger, the default value is 3.
@@ -70,7 +71,7 @@ _______________________________________
   - 正文内容的一行中HTML代码的标签较少，超链接占总长度的比例不大。
 
 因此，网页中符合上述三个条件的行被认为是正文所在的行。由此我们可以得出这样的结论：网页的正文区域是文字密度较大的区域。但是这个结论也有局限性，例如网页中出现的大篇幅文字导航信息，其文字密度较高但不是网页正文。如下图所示：
-  
+
 ![image](/img/1.png)
 
 因此，我们还需要考虑文字行块的长度，因为导航的长度较短而正文行的长度较长。在处理网页时需要先将网页中的所有HTML标签去除，保留空白行和文字，留下的文本记作content。求解行块分布函数的步骤如下：
@@ -103,8 +104,8 @@ _______________________________________
 
 
 ```
-from crawler.cx_extractor_Python import  cx_extractor_Python
-cx = cx_extractor_Python()
+from CxExtractor import CxExtractor
+cx = CxExtractor(threshold=186)
 # test_html = cx.readHtml("E:\\Documents\\123.html")
 test_html = cx.getHtml('http://news.163.com/16/0101/10/BC84MRHS00014AED.html')
 content = cx.filter_tags(test_html)
